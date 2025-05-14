@@ -1,27 +1,26 @@
 import { Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
-const logger = new Logger('Database');
-
 export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy
 {
+  private readonly logger = new Logger('Database');
   async onModuleInit() {
     try {
       await this.$connect();
-      logger.log('Successfully connected!');
+      this.logger.log('Successfully connected!');
     } catch (error) {
-      logger.error(error.message);
+      this.logger.error(error.message);
       process.exit(1);
     }
   }
   async onModuleDestroy() {
     try {
       await this.$disconnect();
-      logger.log('Successfully disconnected!');
+      this.logger.log('Successfully disconnected!');
     } catch (error) {
-      logger.error(error.message);
+      this.logger.error(error.message);
       process.exit(1);
     }
   }
