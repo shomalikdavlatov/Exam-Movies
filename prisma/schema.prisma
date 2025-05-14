@@ -1,0 +1,225 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+  superadmin
+}
+
+enum SubscriptionStatus {
+  active
+  expired
+  canceled
+  pending_payment
+}
+
+enum PaymentMethod {
+  card
+  paypal
+  bank_transfer
+  crypto
+}
+
+enum PaymentStatus {
+  pending
+  completed
+  failed
+  refunded
+}
+
+enum SubscriptionType {
+  free
+  premium
+}
+
+enum MovieQuality {
+  p240 @map("240p")
+  p360 @map("360p")
+  p480 @map("480p")
+  p720 @map("720p")
+  p1080 @map("1080p")
+  k4 @map("4k")
+}
+
+model User {
+  id String @id @default(uuid())
+  username String @db.VarChar(50) @unique
+  email String @db.VarChar(100) @unique
+  password_hash String @db.VarChar(255)
+  role Role @default(user)
+  avatar_url String @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt()
+  full_name String? @db.VarChar(100)
+  phone String? @db.VarChar(20)
+  country String? @db.VarChar(50)
+
+  user_subscriptions UserSubscription[]
+  movies Movie[]
+  favorites Favorite[]
+  reviews Review[]
+  watch_histories WatchHistory[]
+
+  @@map("users")
+}
+
+model SubscriptionPlan {
+  id String @id @default(uuid())
+  name String @db.VarChar(50)
+  price Int
+  duration_days Int 
+  features Json 
+  is_active Boolean @default(true)
+
+  user_subscriptions UserSubscription[]
+
+  @@map("subscription_plans")
+}
+
+model UserSubscription {
+  id String @id @default(uuid())
+  start_date DateTime @default(now())
+  end_date DateTime
+  status SubscriptionStatus @default(pending_payment)
+  auto_renew Boolean @default(false)
+  created_at DateTime @default(now())
+
+  user_id String
+  user User @relation(fields: [user_id], references: [id])
+  plan_id String
+  subscriptionPlan SubscriptionPlan @relation(fields: [plan_id], references: [id])
+
+  payments Payment[]
+
+  @@map("user_subscriptions")
+}
+
+model Payment {
+  id String @id @default(uuid())
+  amount Int
+  payment_method PaymentMethod 
+  payment_details Json
+  status PaymentStatus
+  external_transfer_id String @db.VarChar(100)
+  created_at DateTime @default(now())
+
+  user_subscription_id String
+  userSubscription UserSubscription @relation(fields: [user_subscription_id], references: [id])
+
+  @@map("payments")
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String @db.VarChar(50)
+  slug String @db.VarChar(50) @unique
+  description String
+
+  movie_categories MovieCategory[]
+
+  @@map("categories")
+}
+
+model Movie {
+  id String @id @default(uuid())
+  title String @db.VarChar(100)
+  slug String @db.VarChar(100) @unique
+  description String
+  release_year Int
+  duration_minutes Int
+  poster_url String @db.VarChar(255)
+  rating Int
+  subscription_type SubscriptionType @default(free)
+  view_count Int @default(0)
+  created_at DateTime @default(now())
+
+  created_by String
+  user User @relation(fields: [created_by], references: [id])
+
+  movie_categories MovieCategory[]
+  movie_files MovieFile[]
+  favorites Favorite[]
+  reviews Review[]
+  watch_histories WatchHistory[]
+
+  @@map("movies")
+}
+
+model MovieCategory {
+  id String @id @default(uuid())
+
+  movie_id String
+  movie Movie @relation(fields: [movie_id], references: [id])
+  category_id String
+  category Category @relation(fields: [category_id], references: [id])
+
+  @@map("movie_categories")
+}
+
+model MovieFile {
+  id String @id @default(uuid())
+  file_url String @db.VarChar(255)
+  quality MovieQuality
+  language String @db.VarChar(20) @default("uz")
+
+  movie_id String
+  movie Movie @relation(fields: [movie_id], references: [id])
+
+  @@map("movie_files")
+}
+
+model Favorite {
+  id String @id @default(uuid())
+  created_at DateTime @default(now())
+
+  user_id String
+  user User @relation(fields: [user_id], references: [id])
+  movie_id String
+  movie Movie @relation(fields: [movie_id], references: [id])
+
+  @@unique([user_id, movie_id])
+  @@map("favorites")
+}
+
+model Review {
+  id String @id @default(uuid())
+  rating Int 
+  comment String
+  created_at DateTime @default(now())
+
+  user_id String
+  user User @relation(fields: [user_id], references: [id])
+  movie_id String
+  movie Movie @relation(fields: [movie_id], references: [id])
+
+  @@unique([user_id, movie_id])
+  @@map("reviews")
+}
+
+model WatchHistory {
+  id String @id @default(uuid())
+  watched_duration Int
+  watched_percentage Int
+  last_watched DateTime @default(now())
+  
+  user_id String
+  user User @relation(fields: [user_id], references: [id])
+  movie_id String
+  movie Movie @relation(fields: [movie_id], references: [id])
+
+  @@unique([user_id, movie_id])
+  @@map("watch_histories")
+}
