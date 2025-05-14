@@ -60,7 +60,7 @@ model User {
   email String @db.VarChar(100) @unique
   password_hash String @db.VarChar(255)
   role Role @default(user)
-  avatar_url String @db.VarChar(255)
+  avatar_url String? @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt()
   full_name String? @db.VarChar(100)
