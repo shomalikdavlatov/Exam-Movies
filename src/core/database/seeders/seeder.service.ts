@@ -8,6 +8,7 @@ export class SeederService implements OnModuleInit {
     @Inject(forwardRef(() => PrismaService)) private prisma: PrismaService,
   ) {}
   async seedAll() {
+    await this.seedPlans();
     await this.seedUsers();
   }
   async seedUsers() {
@@ -19,9 +20,8 @@ export class SeederService implements OnModuleInit {
     });
 
     if (!superadminUser) {
-      this.logger.log('Superadmin created');
       const hashedPassword = await bcrypt.hash(password!, +!process.env.HASH);
-      await this.prisma.user.create({
+      const superadmin = await this.prisma.user.create({
         data: {
           username: username!,
           password_hash: hashedPassword,
@@ -29,6 +29,49 @@ export class SeederService implements OnModuleInit {
           role: 'superadmin',
         },
       });
+      const adminPlan = await this.prisma.subscriptionPlan.findFirst({
+        where: { name: 'Admin' },
+      });
+      await this.prisma.userSubscription.create({
+        data: {
+          user_id: superadmin.id,
+          plan_id: adminPlan!.id,
+          status: 'active',
+        },
+      });
+      this.logger.log('Superadmin created!');
+    }
+  }
+  async seedPlans() {
+    const freePlan = await this.prisma.subscriptionPlan.findFirst({
+      where: { name: 'Free' },
+    });
+    const adminPlan = await this.prisma.subscriptionPlan.findFirst({
+      where: { name: 'Admin' },
+    });
+    if (!freePlan) {
+      await this.prisma.subscriptionPlan.create({
+        data: {
+          name: 'Free',
+          price: 0,
+          duration_days: null,
+          features: ['Free plan for everyone'],
+          is_active: true,
+        },
+      });
+      this.logger.log('Free plan created!');
+    }
+    if (!adminPlan) {
+      await this.prisma.subscriptionPlan.create({
+        data: {
+          name: 'Admin',
+          price: 0,
+          duration_days: null,
+          features: ['Premium plan for admins'],
+          is_active: true,
+        },
+      });
+      this.logger.log('Admin plan created!');
     }
   }
   async onModuleInit() {

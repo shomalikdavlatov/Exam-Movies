@@ -3,7 +3,7 @@ import { SeederService } from './seeder.service';
 import { DatabaseModule } from '../database.module';
 
 @Module({
-  imports: [forwardRef(() => DatabaseModule)],
+  imports: [],
   providers: [SeederService],
   exports: [SeederService],
 })

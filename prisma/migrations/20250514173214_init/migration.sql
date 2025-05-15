@@ -23,7 +23,7 @@ CREATE TABLE "users" (
     "email" VARCHAR(100) NOT NULL,
     "password_hash" VARCHAR(255) NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'user',
-    "avatar_url" VARCHAR(255) NOT NULL,
+    "avatar_url" VARCHAR(255),
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "full_name" VARCHAR(100),
@@ -38,7 +38,7 @@ CREATE TABLE "subscription_plans" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "price" INTEGER NOT NULL,
-    "duration_days" INTEGER NOT NULL,
+    "duration_days" INTEGER,
     "features" JSONB NOT NULL,
     "is_active" BOOLEAN NOT NULL DEFAULT true,
 
@@ -49,7 +49,7 @@ CREATE TABLE "subscription_plans" (
 CREATE TABLE "user_subscriptions" (
     "id" TEXT NOT NULL,
     "start_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "end_date" TIMESTAMP(3) NOT NULL,
+    "end_date" TIMESTAMP(3),
     "status" "SubscriptionStatus" NOT NULL DEFAULT 'pending_payment',
     "auto_renew" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

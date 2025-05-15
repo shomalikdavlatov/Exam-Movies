@@ -80,7 +80,7 @@ model SubscriptionPlan {
   id String @id @default(uuid())
   name String @db.VarChar(50)
   price Int
-  duration_days Int 
+  duration_days Int ?
   features Json 
   is_active Boolean @default(true)
 
@@ -92,7 +92,7 @@ model SubscriptionPlan {
 model UserSubscription {
   id String @id @default(uuid())
   start_date DateTime @default(now())
-  end_date DateTime
+  end_date DateTime?
   status SubscriptionStatus @default(pending_payment)
   auto_renew Boolean @default(false)
   created_at DateTime @default(now())

@@ -14,7 +14,7 @@ export class RoleGuard implements CanActivate {
     const handler = context.getHandler();
     const roles = this.reflector.get('roles', handler);
     if (roles.includes(request.user.userRole)) return true;
-    if (roles.includes('OWNER') && request.params.id === request.user.userId)
+    if (roles.includes('owner') && request.params.id === request.user.userId)
       return true;
     throw new ForbiddenException('Role required!');
   }

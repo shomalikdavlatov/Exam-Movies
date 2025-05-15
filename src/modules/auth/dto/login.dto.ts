@@ -1,9 +1,8 @@
-import { IsString, IsStrongPassword, Length } from 'class-validator';
+import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
 
 export class LoginDto {
-  @Length(1, 50)
-  @IsString()
-  username: string;
+  @IsEmail()
+  email: string;
 
   @IsStrongPassword()
   @IsString()

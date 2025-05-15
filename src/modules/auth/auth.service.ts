@@ -37,23 +37,41 @@ export class AuthService {
       );
     if (!process.env.HASH) throw new InternalServerErrorException();
     const hashedPassword = await bcrypt.hash(body.password, +process.env.HASH);
-    // @ts-ignore
-    delete body.password;
+    const { password, ...rest } = body;
     const user = {
-      ...body,
+      ...rest,
       password_hash: hashedPassword,
     };
     const userResponse = await this.prisma.user.create({ data: user });
+    const freePlan = await this.prisma.subscriptionPlan.findFirst({
+      where: { name: 'Free' },
+    });
+    await this.prisma.userSubscription.create({
+      data: {
+        user_id: userResponse.id,
+        plan_id: freePlan!.id,
+        status: 'active',
+      },
+    });
     const token = await this.jwtService.signAsync({
       userId: userResponse.id,
       userRole: userResponse.role,
     });
-    return token;
+    return {
+      token,
+      message: 'Registered successfully!',
+      data: {
+        user_id: userResponse.id,
+        username: userResponse.username,
+        role: userResponse.role,
+        created_at: userResponse.created_at,
+      },
+    };
   }
   async login(body: LoginDto) {
     const user = await this.prisma.user.findFirst({
       where: {
-        username: body.username,
+        email: body.email,
       },
     });
     if (!user)
@@ -68,6 +86,24 @@ export class AuthService {
       userId: user.id,
       userRole: user.role,
     });
-    return token;
+    const userSubscription = await this.prisma.userSubscription.findFirst({
+      where: { user_id: user.id, status: 'active' },
+    });
+    const userPlan = await this.prisma.subscriptionPlan.findFirst({
+      where: { id: userSubscription?.plan_id },
+    });
+    return {
+      token,
+      message: 'Logged in successfully!',
+      data: {
+        user_id: user.id,
+        username: user.username,
+        role: user.role,
+        subscription: {
+          plan_name: userPlan!.name,
+          expires_at: userSubscription!.end_date,
+        },
+      },
+    };
   }
 }
