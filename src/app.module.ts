@@ -13,7 +13,17 @@ import { FavoritesModule } from './modules/favorites/favorites.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 
 @Module({
-  imports: [CoreModule, AuthModule, UsersModule, ProfileModule, SubscriptionsModule, MoviesModule, CategoriesModule, FavoritesModule, ReviewsModule],
+  imports: [
+    CoreModule,
+    AuthModule,
+    UsersModule,
+    ProfileModule,
+    SubscriptionsModule,
+    MoviesModule,
+    CategoriesModule,
+    FavoritesModule,
+    ReviewsModule,
+  ],
   controllers: [],
   providers: [
     {
