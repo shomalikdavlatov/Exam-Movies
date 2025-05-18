@@ -7,9 +7,11 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { AuthGuard } from './common/guards/auth.guard';
 import { ProfileModule } from './modules/profile/profile.module';
 import { SubscriptionsModule } from './modules/subscriptions/subscriptions.module';
+import { MoviesModule } from './modules/movies/movies.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 
 @Module({
-  imports: [CoreModule, AuthModule, UsersModule, ProfileModule, SubscriptionsModule],
+  imports: [CoreModule, AuthModule, UsersModule, ProfileModule, SubscriptionsModule, MoviesModule, CategoriesModule],
   controllers: [],
   providers: [
     {
