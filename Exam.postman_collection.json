@@ -1,0 +1,892 @@
+{
+	"info": {
+		"_postman_id": "c5093f16-3185-49a3-9500-23392e888ea0",
+		"name": "Exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34355064"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "aaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aaaaaaaaa@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Shdshd1234$",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/shomalikdavlatov/Desktop/Screenshot 2025-05-18 at 5.56.42 PM.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"shomalikdavlatov@gmail.com\",\n    \"password\": \"Shomalik1996$\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"everygameplay777@gmail.com\",\n    \"code\": 147412\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/verify",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "get profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "full_name",
+									"value": "Shomalik Davlatov",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/shomalikdavlatov/Desktop/leet.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/9054757d-ad8e-45fd-9615-215aeff8904f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"9054757d-ad8e-45fd-9615-215aeff8904f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "promote",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/promote/16c8e4fd-8664-4aaa-80e2-d4dce0a177c8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"promote",
+								"16c8e4fd-8664-4aaa-80e2-d4dce0a177c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "demote",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/demote/16c8e4fd-8664-4aaa-80e2-d4dce0a177c8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"demote",
+								"16c8e4fd-8664-4aaa-80e2-d4dce0a177c8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subscriptions",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/subscription/plans",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Premium\",\n    \"price\": 50000,\n    \"duration_days\": 30,\n    \"features\": \"Watch all HD movies with this subscription!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/subscription/plans",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activate plan",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/subscription/plans/57b4c880-e150-4662-8552-c8d680818f05/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"plans",
+								"57b4c880-e150-4662-8552-c8d680818f05",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate plan",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/subscription/plans/57b4c880-e150-4662-8552-c8d680818f05/deactivate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"plans",
+								"57b4c880-e150-4662-8552-c8d680818f05",
+								"deactivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"plan_id\": \"57b4c880-e150-4662-8552-c8d680818f05\",\n  \"payment_method\": \"card\",\n  \"auto_renew\": true,\n  \"payment_details\": {\n    \"card_number\": \"4242XXXXXXXX4242\",\n    \"expiry\": \"04/26\",\n    \"card_holder\": \"ALIJON VALIYEV\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/subscription/purchase",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movie",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/movies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "create movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category_ids",
+									"value": "a3eb58ca-a1ef-45aa-8430-5897bb15bcce",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Qasoskorlar",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Zo'r kino",
+									"type": "text"
+								},
+								{
+									"key": "release_year",
+									"value": "2020",
+									"type": "text"
+								},
+								{
+									"key": "duration_minutes",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "poster",
+									"type": "file",
+									"src": "/Users/shomalikdavlatov/Desktop/Screenshot 2025-05-11 at 1.03.15 PM.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/movies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create movie file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "quality",
+									"value": "p720",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "uz",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1f0339bc-4753-4b10-84ac-5198c9bd68e5"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/movies/79b9348f-8485-46a7-9f88-0872bedcf014/files",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"79b9348f-8485-46a7-9f88-0872bedcf014",
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Qasoskorlarrr",
+									"type": "text"
+								},
+								{
+									"key": "poster",
+									"type": "file",
+									"src": "/Users/shomalikdavlatov/Desktop/Screenshot 2025-05-11 at 1.03.15 PM.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/movies/79b9348f-8485-46a7-9f88-0872bedcf014",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"79b9348f-8485-46a7-9f88-0872bedcf014"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/movies/g",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"g"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete movie file",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/movies/files/ff45deb1-8d75-4589-aae7-c89ba9442bfc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"files",
+								"ff45deb1-8d75-4589-aae7-c89ba9442bfc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/categories",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/categories/9ec68165-b4c8-455b-b054-cd50151a6457",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"9ec68165-b4c8-455b-b054-cd50151a6457"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Romance\",\n    \"description\": \"Romance genre is about love\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categories",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Romance\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categories/9ec68165-b4c8-455b-b054-cd50151a6457",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"9ec68165-b4c8-455b-b054-cd50151a6457"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/categories/9ec68165-b4c8-455b-b054-cd50151a6457",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"9ec68165-b4c8-455b-b054-cd50151a6457"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorites",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie_id\": \"79b9348f-8485-46a7-9f88-0872bedcf014\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/favorites",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorites",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorites/79b9348f-8485-46a7-9f88-0872bedcf014",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"79b9348f-8485-46a7-9f88-0872bedcf014"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorites/79b9348f-8485-46a7-9f88-0872bedcf014",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"79b9348f-8485-46a7-9f88-0872bedcf014"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5,\n    \"comment\": \"Cho'tki\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/movies/79b9348f-8485-46a7-9f88-0872bedcf014/reviews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"79b9348f-8485-46a7-9f88-0872bedcf014",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by movie id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/movies/79b9348f-8485-46a7-9f88-0872bedcf014/reviews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"79b9348f-8485-46a7-9f88-0872bedcf014",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/movies/472f1cb2-ed3c-45b8-b96e-e0dd4a800e3d/review",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"movies",
+								"472f1cb2-ed3c-45b8-b96e-e0dd4a800e3d",
+								"review"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.environment.set(\"url\", \"localhost:4000\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
