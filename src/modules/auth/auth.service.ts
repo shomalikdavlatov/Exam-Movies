@@ -16,7 +16,7 @@ export class AuthService {
     private jwtService: JwtService,
     private prisma: PrismaService,
   ) {}
-  async register(body: RegisterDto) {
+  async register(body: RegisterDto, avatar: object | undefined) {
     const userUsername = await this.prisma.user.findFirst({
       where: {
         username: body.username,
@@ -65,6 +65,7 @@ export class AuthService {
         username: userResponse.username,
         role: userResponse.role,
         created_at: userResponse.created_at,
+        avatar_url: avatar ? avatar['path'] : null,
       },
     };
   }

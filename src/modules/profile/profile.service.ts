@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { deleteFile } from 'src/common/utils/file.util';
 import { PrismaService } from 'src/core/database/prisma.service';
-import { UpdateProfileDto } from './dto/update.profile.dto';
 
 @Injectable()
 export class ProfileService {
@@ -19,7 +19,12 @@ export class ProfileService {
     };
   }
   async updateProfile(id: string, body: any, avatar: any) {
-    if (avatar) body.avatar_url = avatar.path;
+    const user = await this.prisma.user.findFirst({ where: { id } });
+
+    if (avatar) {
+      if (user!.avatar_url) deleteFile(user!.avatar_url);
+      body.avatar_url = avatar.path;
+    }
     for (const key in body) {
       if (body[key] === undefined) delete body[key];
     }

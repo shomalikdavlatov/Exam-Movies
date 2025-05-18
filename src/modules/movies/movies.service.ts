@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/core/database/prisma.service';
 import { MovieQueryDto } from './dto/movie.query.dto';
-import slugify from 'slugify';
-import SUI from 'short-unique-id';
 import { CreateMovieDto } from './dto/create.movie.dto';
 import { deleteFile } from 'src/common/utils/file.util';
 import { MovieFileDto } from './dto/movie.file.dto';
 import { UpdateMovieDto } from './dto/update.movie.dto';
+import slugify from 'slugify';
+import SUI from 'short-unique-id';
 
 @Injectable()
 export class MoviesService {
@@ -43,6 +43,15 @@ export class MoviesService {
       where['release_year']
         ? (where['release_year']['lt'] = query.max_year)
         : (where['release_year'] = { lt: query.max_year });
+    if (query.category) {
+      where['movie_categories'] = {
+        some: {
+          category: {
+            name: query.category,
+          },
+        },
+      };
+    }
     get['where'] = where;
     const count = await this.prisma.movie.findMany(get);
     if (query.limit) get['take'] = query.limit;
@@ -69,7 +78,6 @@ export class MoviesService {
       },
     };
   }
-  // Not ready
   async getOne(slug: string) {
     const movie = await this.prisma.movie.findFirst({
       where: { slug },
