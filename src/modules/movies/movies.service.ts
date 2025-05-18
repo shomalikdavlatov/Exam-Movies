@@ -88,6 +88,7 @@ export class MoviesService {
         poster_url: true,
         release_year: true,
         rating: true,
+        view_count: true,
         subscription_type: true,
         movie_categories: {
           select: { category: { select: { name: true } } },
@@ -96,6 +97,10 @@ export class MoviesService {
     });
     if (!movie)
       throw new NotFoundException('Movie with the specified slug not found');
+    await this.prisma.movie.update({
+      where: { slug },
+      data: { view_count: movie.view_count + 1 },
+    });
     const { movie_categories, ...rest } = movie;
     const files = await this.prisma.movieFile.findMany({
       where: { movie_id: movie.id },
