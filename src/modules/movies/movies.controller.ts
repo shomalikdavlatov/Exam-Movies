@@ -80,7 +80,6 @@ export class MoviesController {
   @Post(':id/files')
   @UseGuards(RoleGuard)
   @SetMetadata('roles', ['superadmin', 'admin'])
-  @SetMetadata('roles', ['superadmin', 'admin'])
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
