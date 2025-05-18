@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Verification Code</title>
+    <style>
+      body {
+        background-color: #f7f7f7;
+        font-family: Arial, sans-serif;
+        padding: 40px 0;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .code {
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 6px;
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 20px 0;
+        display: inline-block;
+        color: #333;
+      }
+
+      .message {
+        font-size: 14px;
+        color: #666;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='code'>{{code}}</div>
+      <div class='message'>
+        This code is valid for 10 minutes.
+      </div>
+    </div>
+  </body>
+</html>
